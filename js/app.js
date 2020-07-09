@@ -1,19 +1,23 @@
-(function() {
-    const button = document.querySelector('#btn')
-    const body = document.querySelector('body')
-    const hexValues = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F']
-    const value = document.querySelector('#hex-value')
+let documentBody = document.querySelector("body");
+let colourButton = document.getElementById("btn");
+let colourOutput = document.getElementById("hex-value");
 
-    button.addEventListener('click', changeHex)
+const genHexColor = () => {
+    let letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        let randomIndex = Math.floor(Math.random() * 16);
+        color += letters[randomIndex];
+    };
+    return color;
+};
 
-    function changeHex(){
-        let hex = '#'
+const colorChange = () => {
+    let hexColor = genHexColor();
+    documentBody.style.backgroundColor = hexColor;
+    colourOutput.textContent = `${hexColor}`;
+};
 
-        for (let i = 0; i < 6; i++){
-            const index = Math.floor(Math.random()*hexValues.length)
-            hex += hexValues[index]
-        }
-        value.textContent = hex
-        body.style.backgroundColor = hex
-    }
-} )()
+
+colourButton.addEventListener("click", colorChange);
+
